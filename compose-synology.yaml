@@ -1,0 +1,12 @@
+version: "3"
+services:
+  nvr-notify:
+    container_name: nvr-notify
+    image: ghcr.io/cyanyux/nvr-notify:latest
+    restart: unless-stopped
+    environment:
+      NVR_TYPE: synology
+      LINE_NOTIFY_TOKENS: "TOKEN1, TOKEN2, TOKEN3" # Required: replace with your own LINE Notify tokens
+      FLASK_RUN_HOST: 0.0.0.0 # Optional: replace with your own host (default: 0.0.0.0)
+      FLASK_RUN_PORT: 8080 # Optional: replace with your own port (default: 8080)
+    network_mode: host

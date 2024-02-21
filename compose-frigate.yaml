@@ -1,0 +1,64 @@
+version: "3"
+services:
+  frigate:
+    container_name: frigate
+    image: ghcr.io/blakeblackshear/frigate:0.13.2
+    privileged: true # this may not be necessary for all setups
+    restart: unless-stopped
+    shm_size: "512mb" # update for your cameras based on calculation here https://docs.frigate.video/frigate/installation/#calculating-required-shm-size
+    devices:
+      # - /dev/bus/usb:/dev/bus/usb # Passes the USB Coral, needs to be modified for other versions
+      # - /dev/apex_0:/dev/apex_0 # Passes a PCIe Coral, follow driver instructions here https://coral.ai/docs/m2/get-started/#2a-on-linux
+      # - /dev/video11:/dev/video11 # For Raspberry Pi 4B
+      - /dev/dri/renderD128 # for intel hwaccel, needs to be updated for your hardware
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./frigate/config:/config
+      - ./frigate/storage:/media/frigate
+      - ./frigate/models:/models
+      - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+    ports:
+      - "5000:5000"
+      - "8554:8554" # RTSP feeds
+      # - "8555:8555/tcp" # WebRTC over tcp
+      # - "8555:8555/udp" # WebRTC over udp
+    environment:
+      FRIGATE_RTSP_USER: "username" # replace with your own username
+      FRIGATE_RTSP_PASSWORD: "password" # replace with your own password
+  nvr-notify:
+    container_name: nvr-notify
+    image: ghcr.io/cyanyux/nvr-notify:latest
+    restart: unless-stopped
+    depends_on:
+      - mosquitto
+    environment:
+      NVR_TYPE: frigate
+      LINE_NOTIFY_TOKENS: "TOKEN1, TOKEN2, TOKEN3" # Required: replace with your own LINE Notify tokens
+      FRIGATE_HOST: localhost # Optional: replace with your own host (default: localhost)
+      MQTT_BROKER_ADDRESS: localhost # Optional: replace with your own MQTT broker address (default: localhost)
+      MQTT_BROKER_PORT: 1883 # Optional: replace with your own MQTT broker port (default: 1883)
+      MQTT_BROKER_USERNAME: "mqtt_user" # Optional: replace with your own MQTT broker username (default: None)
+      MQTT_BROKER_PASSWORD: "mqtt_password" # Optional: replace with your own MQTT broker password (default: None)
+      MQTT_BROKER_TOPIC: "frigate/events" # Optional: replace with your own MQTT broker topic (default: frigate/events)
+      SEND_INTERVAL: 1.5 # seconds # Optional: replace with your own send interval (default: 1.5)
+    network_mode: host
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto:latest
+    restart: unless-stopped
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+    ports:
+      - "1883:1883"
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    volumes:
+      - ./hass/config:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
