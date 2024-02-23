@@ -35,4 +35,5 @@ README.md
 
 venv
 frigate
+!frigate/models/
 hass
