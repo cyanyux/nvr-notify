@@ -23,11 +23,11 @@
 9. Click **Apply**.
 10. After you have finished setting up, click on the webhook in the list to edit or remove it. You can also click **Send Test Message** to check that your settings are correct.
 
-![[assets/Screenshot 2024-02-22 214526.png]]
+![img1](docs/img/img1.png)
 
-![[assets/Screenshot 2024-02-22 214731.png]]
+![img2](docs/img/img2.png)
 
-![[assets/Screenshot 2024-02-22 214842.png]]
+![img3](docs/img/img3.png)
 ## Synology Surveillance Station
 
 ### Install nvr-notify
@@ -46,11 +46,11 @@
     - Nas IP Address: `http://localhost:5000`
 3. Click **Test Send** to verify the configuration.
 
-![img1](docs/img/img1.png)
+![img4](docs/img/img4.png)
 
-![img2](docs/img/img2.png)
+![img5](docs/img/img5.png)
 
-![img3](docs/img/img3.png)
+![img6](docs/img/img6.png)
 
 ## Frigate NVR
 
@@ -93,11 +93,11 @@ If you want to schedule turning on and off detection and motion, you should conf
 1. [Home Assistant Integration](https://docs.frigate.video/integrations/home-assistant)
 2. Crate Automation, **Settings > Automations & scenes > CREATE AUTOMATION**
 
-![img4](docs/img/img4.png)
+![img7](docs/img/img7.png)
 
-![img5](docs/img/img5.png)
+![img8](docs/img/img8.png)
 
-![img6](docs/img/img6.png)
+![img9](docs/img/img9.png)
 
 ### How to export YOLOv8 model to OpenVINO
 
