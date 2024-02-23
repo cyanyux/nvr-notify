@@ -20,11 +20,12 @@ services:
         target: /tmp/cache
         tmpfs:
           size: 1000000000
-    ports:
-      - "5000:5000"
-      - "8554:8554" # RTSP feeds
-      # - "8555:8555/tcp" # WebRTC over tcp
-      # - "8555:8555/udp" # WebRTC over udp
+    # ports:
+    #   - "5000:5000"
+    #   - "8554:8554" # RTSP feeds
+    #   - "8555:8555/tcp" # WebRTC over tcp
+    #   - "8555:8555/udp" # WebRTC over udp
+    network_mode: host
     environment:
       FRIGATE_RTSP_USER: "username" # replace with your own username
       FRIGATE_RTSP_PASSWORD: "password" # replace with your own password
