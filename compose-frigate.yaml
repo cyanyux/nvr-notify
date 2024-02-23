@@ -34,6 +34,8 @@ services:
     restart: unless-stopped
     depends_on:
       - mosquitto
+    volumes:
+      - ./frigate/models:/frigate/models
     environment:
       NVR_TYPE: frigate
       LINE_NOTIFY_TOKENS: "TOKEN1, TOKEN2, TOKEN3" # Required: replace with your own LINE Notify tokens
