@@ -35,5 +35,5 @@ README.md
 
 venv
 frigate
-!frigate/models/
 hass
+mosquitto
