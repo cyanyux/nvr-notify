@@ -159,7 +159,10 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-frigate/*
-!frigate/models*
+# frigate/*
+# !frigate/models/
+frigate/config/*
+!frigate/config/config.yaml
+frigate/storage/
 hass/
 .vscode/
