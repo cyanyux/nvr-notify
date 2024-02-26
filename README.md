@@ -10,6 +10,8 @@
 4. Copy the generated token.
 5. Replace the `LINE_NOTIFY_TOKENS` in the **compose-synology.yaml** and **compose-frigate.yaml** files.
 
+**Note:** Remember to add Line Notify as a friend or invite it to a group chat before you can send notifications.
+
 ## Synology DSM Line Notify
 
 1. Open **Control Panel**, select **Notification**, click **Webhook**, and click **Add**.
@@ -45,6 +47,7 @@
     - Body: `{"message": "%SUBJECT%", "image_url": "%ATTACHMENT%"}`
     - Nas IP Address: `http://localhost:5000`
 3. Click **Test Send** to verify the configuration.
+4. Click **Done** and go to **Notification** > **Rules** to enable notification for events that you want to be notified. 
 
 ![img4](docs/img/img4.png)
 
