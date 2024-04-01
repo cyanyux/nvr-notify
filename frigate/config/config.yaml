@@ -128,6 +128,7 @@ cameras:
     zones:
       zone_0:
         coordinates: 1920,0,1920,1080,0,1080,0,0
+        inertia: 3
   Cam-2: # <------ Name the camera
     ffmpeg:
       inputs:
@@ -140,3 +141,4 @@ cameras:
     zones:
       zone_0:
         coordinates: 1920,0,1920,1080,0,1080,0,0
+        inertia: 3
